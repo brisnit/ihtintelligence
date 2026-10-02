@@ -71,44 +71,44 @@ export function LineChart({ series, height = 240, xTicks, yDomain, unit, decimal
       {width > 0 && <svg width={width} height={height} role="img" aria-label={ariaLabel}>
         {scenarioFrom !== undefined && (
           <>
-            <rect x={sx(scenarioFrom)} y={m.t} width={Math.max(0, sx(x1) - sx(scenarioFrom))} height={ih} fill="rgba(9,252,210,0.035)" />
-            <text x={sx(scenarioFrom) + 8} y={m.t + 12} fill="#7f918c" fontSize="11" fontWeight="600" letterSpacing="0.06em">
+            <rect x={sx(scenarioFrom)} y={m.t} width={Math.max(0, sx(x1) - sx(scenarioFrom))} height={ih} style={{ fill: 'var(--scenario-fill)' }} />
+            <text x={sx(scenarioFrom) + 8} y={m.t + 12} style={{ fill: 'var(--ink-3)' }} fontSize="11" fontWeight="600" letterSpacing="0.06em">
               ILLUSTRATIVE SCENARIO
             </text>
-            <line x1={sx(scenarioFrom)} x2={sx(scenarioFrom)} y1={m.t} y2={m.t + ih} stroke="#2a443d" strokeDasharray="3 4" />
+            <line x1={sx(scenarioFrom)} x2={sx(scenarioFrom)} y1={m.t} y2={m.t + ih} style={{ stroke: 'var(--chart-guide)' }} strokeDasharray="3 4" />
           </>
         )}
         {yTicks.map((t, i) => (
           <g key={i}>
-            <line x1={m.l} x2={width - m.r} y1={sy(t)} y2={sy(t)} stroke="#1a2b27" />
-            <text x={m.l - 8} y={sy(t) + 4} textAnchor="end" fill="#7f918c" fontSize="11" className="num">
+            <line x1={m.l} x2={width - m.r} y1={sy(t)} y2={sy(t)} style={{ stroke: 'var(--chart-grid)' }} />
+            <text x={m.l - 8} y={sy(t) + 4} textAnchor="end" style={{ fill: 'var(--ink-3)' }} fontSize="11" className="num">
               {t.toFixed(t >= 100 ? 0 : decimals)}
             </text>
           </g>
         ))}
         {xTicks.map((t) => (
-          <text key={t.x} x={sx(t.x)} y={height - 8} textAnchor="middle" fill="#7f918c" fontSize="11">
+          <text key={t.x} x={sx(t.x)} y={height - 8} textAnchor="middle" style={{ fill: 'var(--ink-3)' }} fontSize="11">
             {t.label}
           </text>
         ))}
         {series.map((s) => {
           const d = s.points.map((p, i) => `${i ? 'L' : 'M'}${sx(p.x)},${sy(p.y)}`).join(' ')
-          const c = s.color ?? '#09FCD2'
+          const c = s.color ?? 'var(--series)'
           return (
             <g key={s.name}>
-              <path d={d} fill="none" stroke={c} strokeWidth={2} strokeDasharray={s.dashed ? '6 6' : undefined} strokeLinecap="round" strokeLinejoin="round" opacity={s.dashed ? 0.85 : 1} />
+              <path d={d} fill="none" style={{ stroke: c }} strokeWidth={2} strokeDasharray={s.dashed ? '6 6' : undefined} strokeLinecap="round" strokeLinejoin="round" opacity={s.dashed ? 0.85 : 1} />
               {s.showDots !== false &&
                 s.points.map((p) => (
-                  <circle key={p.x} cx={sx(p.x)} cy={sy(p.y)} r={s.dashed ? 3 : 4.5} fill={s.dashed ? '#101B18' : c} stroke={s.dashed ? c : '#101B18'} strokeWidth={2} />
+                  <circle key={p.x} cx={sx(p.x)} cy={sy(p.y)} r={s.dashed ? 3 : 4.5} style={{ fill: s.dashed ? 'var(--card)' : c, stroke: s.dashed ? c : 'var(--card)' }} strokeWidth={2} />
                 ))}
             </g>
           )
         })}
         {hover !== null && (
-          <line x1={sx(hover)} x2={sx(hover)} y1={m.t} y2={m.t + ih} stroke="#3c5a52" strokeWidth={1} />
+          <line x1={sx(hover)} x2={sx(hover)} y1={m.t} y2={m.t + ih} style={{ stroke: 'var(--chart-cursor)' }} strokeWidth={1} />
         )}
         {hoverPts.map(({ s, p }) => (
-          <circle key={s.name} cx={sx(p!.x)} cy={sy(p!.y)} r={6} fill="none" stroke={s.color ?? '#09FCD2'} strokeWidth={2} />
+          <circle key={s.name} cx={sx(p!.x)} cy={sy(p!.y)} r={6} fill="none" style={{ stroke: s.color ?? 'var(--series)' }} strokeWidth={2} />
         ))}
         <rect x={m.l} y={m.t} width={iw} height={ih} fill="transparent" onPointerMove={onMove} onPointerLeave={() => setHover(null)} />
       </svg>}
@@ -144,8 +144,8 @@ export function AttendanceBars({ data, height = 180 }: { data: { label: string; 
       {width > 0 && <svg width={width} height={height} role="img" aria-label="Sessions completed versus planned per week">
         {Array.from({ length: max + 1 }, (_, i) => (
           <g key={i}>
-            <line x1={m.l} x2={width - m.r} y1={sy(i)} y2={sy(i)} stroke="#1a2b27" />
-            <text x={m.l - 8} y={sy(i) + 4} textAnchor="end" fill="#7f918c" fontSize="11">{i}</text>
+            <line x1={m.l} x2={width - m.r} y1={sy(i)} y2={sy(i)} style={{ stroke: 'var(--chart-grid)' }} />
+            <text x={m.l - 8} y={sy(i) + 4} textAnchor="end" style={{ fill: 'var(--ink-3)' }} fontSize="11">{i}</text>
           </g>
         ))}
         {data.map((d, i) => {
@@ -153,9 +153,9 @@ export function AttendanceBars({ data, height = 180 }: { data: { label: string; 
           return (
             <g key={i} onPointerEnter={() => setHover(i)} onPointerLeave={() => setHover(null)}>
               <rect x={m.l + bw * i} y={m.t} width={bw} height={ih} fill="transparent" />
-              <rect x={cx - barW / 2} y={sy(d.planned)} width={barW} height={ih - (sy(d.planned) - m.t)} rx={4} fill="none" stroke="#2a443d" strokeWidth={1.5} strokeDasharray="3 3" />
-              {d.completed > 0 && <rect x={cx - barW / 2 + 2} y={sy(d.completed) + 2} width={barW - 4} height={Math.max(0, sy(0) - sy(d.completed) - 2)} rx={4} fill={d.completed < d.planned ? '#06b89a' : '#09FCD2'} />}
-              <text x={cx} y={height - 10} textAnchor="middle" fill={hover === i ? '#fff' : '#7f918c'} fontSize="11">{d.label}</text>
+              <rect x={cx - barW / 2} y={sy(d.planned)} width={barW} height={ih - (sy(d.planned) - m.t)} rx={4} fill="none" style={{ stroke: 'var(--chart-guide)' }} strokeWidth={1.5} strokeDasharray="3 3" />
+              {d.completed > 0 && <rect x={cx - barW / 2 + 2} y={sy(d.completed) + 2} width={barW - 4} height={Math.max(0, sy(0) - sy(d.completed) - 2)} rx={4} style={{ fill: 'var(--series)', opacity: d.completed < d.planned ? 0.75 : 1 }} />}
+              <text x={cx} y={height - 10} textAnchor="middle" style={{ fill: hover === i ? 'var(--ink)' : 'var(--ink-3)' }} fontSize="11">{d.label}</text>
             </g>
           )
         })}

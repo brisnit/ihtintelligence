@@ -115,14 +115,14 @@ function Results({ rows }: { rows: CohortRecord[] }) {
           <h3>Progress against member goals</h3>
           <p className="faint xs" style={{ marginTop: 4 }}>Coach-recorded at progress review, against each member’s own intake goal</p>
           <div style={{ display: 'flex', gap: 2, height: 14, marginTop: 16, borderRadius: 6, overflow: 'hidden' }}>
-            {([['met', '#09FCD2'], ['partial', '#06a88b'], ['not-yet', '#2a443d'], ['unknown', 'transparent']] as const).map(([k, c]) =>
-              goals[k] ? <div key={k} title={`${k}: ${goals[k]}`} style={{ flex: goals[k], background: c, border: k === 'unknown' ? '1px dashed #3c5a52' : undefined, borderRadius: 3 }} /> : null,
+            {([['met', 'var(--series)'], ['partial', 'var(--series-2)'], ['not-yet', 'var(--series-muted)'], ['unknown', 'transparent']] as const).map(([k, c]) =>
+              goals[k] ? <div key={k} title={`${k}: ${goals[k]}`} style={{ flex: goals[k], background: c, border: k === 'unknown' ? '1px dashed var(--chart-cursor)' : undefined, borderRadius: 3 }} /> : null,
             )}
           </div>
           <div className="stack-sm small" style={{ marginTop: 12 }}>
             <span className="row between"><span><i className="sw box" /> Goal met</span><b className="num">{goals.met}</b></span>
-            <span className="row between"><span><i className="sw box" style={{ background: '#06a88b' }} /> Partial progress</span><b className="num">{goals.partial}</b></span>
-            <span className="row between"><span><i className="sw box" style={{ background: '#2a443d' }} /> Not yet</span><b className="num">{goals['not-yet']}</b></span>
+            <span className="row between"><span><i className="sw box" style={{ background: 'var(--series-2)' }} /> Partial progress</span><b className="num">{goals.partial}</b></span>
+            <span className="row between"><span><i className="sw box" style={{ background: 'var(--series-muted)' }} /> Not yet</span><b className="num">{goals['not-yet']}</b></span>
             <span className="row between faint"><span><i className="sw outline" style={{ borderStyle: 'dashed' }} /> Not recorded</span><b className="num">{goals.unknown}</b></span>
           </div>
         </div>
@@ -137,8 +137,8 @@ function Results({ rows }: { rows: CohortRecord[] }) {
         </div>
         {hi.length >= MIN_METRIC && lo.length >= MIN_METRIC ? (
           <div className="stack">
-            <Bar label="≥ 80% of planned sessions" n={hi.length} v={median(hi)} max={Math.max(Math.abs(median(hi)), Math.abs(median(lo)))} color="#09FCD2" />
-            <Bar label="< 80% of planned sessions" n={lo.length} v={median(lo)} max={Math.max(Math.abs(median(hi)), Math.abs(median(lo)))} color="#E9A23B" />
+            <Bar label="≥ 80% of planned sessions" n={hi.length} v={median(hi)} max={Math.max(Math.abs(median(hi)), Math.abs(median(lo)))} color="var(--series)" />
+            <Bar label="< 80% of planned sessions" n={lo.length} v={median(lo)} max={Math.max(Math.abs(median(hi)), Math.abs(median(lo)))} color="var(--series-amber)" />
             <p className="xs faint">Members who attended more also tended to show larger reductions. This does not establish cause, and the groups may differ in other ways.</p>
           </div>
         ) : (

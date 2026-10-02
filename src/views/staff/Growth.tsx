@@ -70,7 +70,7 @@ export function Growth() {
 
         <div className="card">
           <div className="card-head"><h3><Megaphone size={18} className="aqua" /> Aggregate outcome story</h3><span className={`pill ${s.storyStatus === 'in-review' ? 'sky' : ''}`}>{s.storyStatus === 'in-review' ? 'With owner for review' : 'Draft for review'}</span></div>
-          <div className="record" style={{ padding: 18, background: 'linear-gradient(160deg, #0d2420, #08120f)' }}>
+          <div className="record" style={{ padding: 18, background: 'var(--hero-bg)' }}>
             <div className="eyebrow" style={{ fontSize: 11 }}>Marketing preview · synthetic</div>
             <p className="head" style={{ fontSize: 26, marginTop: 8, textTransform: 'uppercase' }}>{improved} of {storyRows.length} members lowered their body fat</p>
             <p className="small muted" style={{ marginTop: 6 }}>Among members who completed Body Composition Foundations and had a baseline and final InBody scan. Median change {med.toFixed(1)} percentage points.</p>

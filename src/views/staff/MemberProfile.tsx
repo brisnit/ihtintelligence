@@ -350,7 +350,7 @@ function CheckIns() {
           <thead><tr><th>Date</th><th>Energy</th><th>Recovery</th><th>Soreness</th><th>Note</th></tr></thead>
           <tbody>
             {all.map((c) => (
-              <tr key={c.id} style={c.isNew ? { background: 'rgba(9,252,210,0.06)' } : undefined}>
+              <tr key={c.id} style={c.isNew ? { background: 'var(--new-row)' } : undefined}>
                 <td className="num" style={{ whiteSpace: 'nowrap' }}>{fmtDate(c.date)}{c.isNew && <span className="aqua xs"> · new</span>}</td>
                 <td className="num">{c.energy}</td>
                 <td className="num">{c.recovery}</td>

@@ -11,7 +11,9 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       {failed ? (
         <div className="logo-fallback">IHT FACTOR</div>
       ) : (
-        <img className="logo-img" src="/iht-logo.png" alt="IHT FACTOR" onError={() => setFailed(true)} />
+        <span className="logo-plate" style={{ display: 'inline-block' }}>
+          <img className="logo-img" src="/iht-logo.png" alt="IHT FACTOR" onError={() => setFailed(true)} />
+        </span>
       )}
       {!compact && (
         <div className="logo-sub">

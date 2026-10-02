@@ -23,6 +23,8 @@ npm run build
 npm run preview    # http://localhost:4173
 ```
 
+**Light / Dark** (top bar) switches themes. The choice is remembered in `localStorage` and is not affected by Reset demo.
+
 Demo state lives in `sessionStorage`, so an accidental reload mid-meeting keeps your place. **Reset demo** (top bar) restores the starting state.
 
 ## Three-minute meeting script
@@ -72,4 +74,4 @@ src/
 - Members never see internal tags. Testimonials require consent on file.
 - Campaign ROI is not inferred from attendance or scan data.
 
-Brand: IHT FACTOR logo from ihtfactor.com, with Rajdhani and Inter. Aqua `#09FCD2` on `#050B0A`.
+Brand: IHT FACTOR logo from ihtfactor.com, with Rajdhani and Inter. Aqua `#09FCD2` on `#050B0A`. In light mode the official white logo sits on a dark plate (unaltered), aqua remains the primary-button fill, and text and chart marks use a deeper teal (`#00806F` / `#00A38A`) for contrast on white. Theme tokens live at the top of `src/index.css`.

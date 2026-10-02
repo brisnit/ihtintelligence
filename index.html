@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <script>
+      try { if (localStorage.getItem('iht-intelligence-theme') === 'light') document.documentElement.dataset.theme = 'light' } catch (e) {}
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

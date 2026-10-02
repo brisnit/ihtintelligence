@@ -1,9 +1,10 @@
-import { Activity, BarChart3, CalendarDays, Database, FlaskConical, Home, LineChart, MessageCircle, Play, RotateCcw, Sprout, User, Users } from 'lucide-react'
+import { Activity, BarChart3, Moon, Sun, CalendarDays, Database, FlaskConical, Home, LineChart, MessageCircle, Play, RotateCcw, Sprout, User, Users } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { StoreProvider, useStore } from './state/store'
 import type { MemberView, StaffView } from './state/store'
 import { Logo, Toasts } from './components/ui'
 import { Tour } from './components/Tour'
+import { useTheme } from './state/theme'
 import { StaffToday } from './views/staff/StaffToday'
 import { MemberProfile } from './views/staff/MemberProfile'
 import { MembersList } from './views/staff/MembersList'
@@ -52,6 +53,7 @@ function Shell() {
   const go = (v: string) => (staff ? goStaff(v as StaffView) : goMember(v as MemberView))
 
   const startTour = () => set({ tourStep: 0 })
+  const { theme, toggle } = useTheme()
 
   let page
   if (staff) {
@@ -97,6 +99,9 @@ function Shell() {
           <div className="show-mobile"><RoleSwitch /></div>
           <button className="btn sm primary" onClick={startTour} aria-label="Start guided demo">
             <Play size={15} /> <span className="hide-mobile">Start guided demo</span>
+          </button>
+          <button className="btn sm theme-btn" onClick={toggle} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} title={theme === 'dark' ? 'Light mode' : 'Dark mode'}>
+            {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />} <span className="hide-mobile lbl-theme">{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
           <button className="btn sm" onClick={reset} aria-label="Reset demo">
             <RotateCcw size={15} /> <span className="hide-mobile">Reset demo</span>
